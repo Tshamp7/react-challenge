@@ -1,54 +1,43 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import Education from "./Education";
 import ErrorMsg from "./ErrorMsg";
 
-interface Home {
-  pathname: string;
-}
-
-interface Props {
-    name: string;
-}
-
-const Home = (props: Props) => {
-//   const [name, setName] = useState("");
-  const [redirect, setRedirect] = useState(false);
+const Home = () => {
+  const [input, setInput] = useState("");
+  const [user, setUser] = useState(false);
   const [errorMsg, setErrorMsg] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    setErrorMsg(false);
-    props.name !== "" ? setRedirect(true) : setErrorMsg(true);
+    input !== "" ? setUser(true) : setErrorMsg(true);
   };
 
   const message = "Name can't be blank";
 
-  if (redirect) {
-    <Redirect to={{ pathname: "/education", name: { props.name } }} />;
+  if (user) {
+    return <Education name={input} />;
+  } else {
+    return (
+      <div className="ui center aligned container">
+        <div className="ui middle aligned container">
+          <p>Hi there! Weclome to your education showcase!</p>
+        </div>
+        <form onSubmit={(e) => handleSubmit(e)} className="ui container">
+          <p>Type your name and click "Enter" below to begin!</p>
+          <input
+            className="ui input"
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <input className="ui button" type="submit" value="Enter" />
+          <br />
+        </form>
+        <br />
+        {errorMsg && <ErrorMsg message={message} />}
+      </div>
+    );
   }
-
-  return (
-    <div className="ui center aligned container">
-      <div className="ui middle aligned container">
-        <p>Hi there! Weclome to your education showcase!</p>
-      </div>
-      <div className="ui container">
-        <p>Type your name and click "Enter" below to begin!</p>
-        <input
-          className="ui input"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <br />
-      <button className="ui button" onSubmit={handleSubmit}>
-        Enter
-      </button>
-      <br />
-      {errorMsg && <ErrorMsg message={message} />}
-    </div>
-  );
 };
 
 export default Home;

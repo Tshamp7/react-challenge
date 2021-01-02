@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import reducer from "./reducers/nameReducer";
 
 ReactDOM.render(
   <React.StrictMode>

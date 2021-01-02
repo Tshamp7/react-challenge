@@ -1,10 +1,15 @@
 import React from "react";
-interface Education {
+interface EducationInt {
   name: string;
 }
 
-const Education = (name: Education) => {
-  return <div></div>;
+const Education = (props: EducationInt) => {
+  return (
+    <div className="ui container">
+      <p>Education page</p>
+      <p>{props.name}</p>
+    </div>
+  );
 };
 
 export default Education;
