@@ -10,9 +10,8 @@ const Home = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     input !== "" ? setUser(true) : setErrorMsg(true);
+    console.log(`${input}`);
   };
-
-  const message = "Name can't be blank";
 
   if (user) {
     return <Education name={input} />;
@@ -34,7 +33,7 @@ const Home = () => {
           <br />
         </form>
         <br />
-        {errorMsg && <ErrorMsg message={message} />}
+        {errorMsg ? <ErrorMsg message="Name cant be blank" /> : null}
       </div>
     );
   }
