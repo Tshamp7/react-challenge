@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Container, Box, BoxTitle, BoxText } from "../styles/styleComponents";
+import {
+  Container,
+  Box,
+  BoxTitle,
+  BoxText,
+  Form,
+} from "../styles/styleComponents";
 import Education from "./Education";
 import ErrorMsg from "./ErrorMsg";
 
@@ -11,7 +17,6 @@ const Home = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     input !== "" ? setUser(true) : setErrorMsg(true);
-    console.log(`${input}`);
   };
 
   if (user) {
@@ -19,9 +24,10 @@ const Home = () => {
   } else {
     return (
       <Container>
-        <BoxTitle>Hi there! Weclome to your education showcase!</BoxTitle>
         <Box>
-          <form onSubmit={(e) => handleSubmit(e)}>
+          <BoxTitle>Hi there! Weclome to your education showcase!</BoxTitle>
+
+          <Form onSubmit={(event: React.FormEvent) => handleSubmit(event)}>
             <BoxText>Type your name and click "Enter" below to begin!</BoxText>
             <div className="ui input">
               <input
@@ -34,7 +40,7 @@ const Home = () => {
             <br />
             <br />
             <input className="ui button" type="submit" value="Enter" />
-          </form>
+          </Form>
         </Box>
         <br />
         {errorMsg ? <ErrorMsg message="Name cant be blank" /> : null}

@@ -17,6 +17,32 @@ export const Box = styled.div`
   display: flex;
   width: ${px2vw(320, 320)};
   min-height: ${px2vw(200, 320)};
+  flex-direction: ${(props) => (props.row ? "row" : "column")};
+  justify-content: ${(props) =>
+    props.spaceEven ? "space-evenly" : "flex-start"};
+  align-items: center;
+  padding: ${px2vw(20)};
+  margin: ${px2vw(20)};
+  background-color: ${(props) => props.bgColor};
+  height: auto;
+
+  @media (min-width: 768px) {
+    width: ${px2vw(320, 768)};
+    min-height: ${px2vw(200, 768)};
+    height: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    width: ${px2vw(500)};
+    min-height: ${px2vw(300)};
+    height: 100%;
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  width: ${px2vw(320, 320)};
+  min-height: ${px2vw(200, 320)};
   flex-direction: column;
   align-items: center;
   padding: ${px2vw(20)};
@@ -48,9 +74,76 @@ export const BoxTitle = styled.h3`
 export const BoxText = styled.p`
   margin-top: ${px2vw(20)};
   color: #666;
+  text-align: center;
   font-size: 1.5rem;
 
   @media (min-width: 1024px) {
     font-size: 1rem;
+  }
+`;
+
+export const EduSideBar = styled.div`
+  display: flex;
+  width: 10%;
+  min-height: ${px2vw(200, 320)};
+  flex-direction: ${(props) => (props.row ? "row" : "column")};
+  align-items: center;
+  padding: ${px2vw(20)};
+  margin: ${px2vw(20)};
+  background-color: ${(props) => props.bgColor};
+  height: 100%;
+
+  @media (min-width: 768px) {
+    width: ${px2vw(320, 768)};
+    min-height: ${px2vw(200, 768)};
+    height: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    width: ${px2vw(500)};
+    min-height: ${px2vw(300)};
+    height: 100%;
+  }
+
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+`;
+
+export const EduDisplay = styled.div`
+  display: flex;
+  min-height: ${px2vw(200, 320)};
+  flex-direction: ${(props) => (props.row ? "row" : "column")};
+  align-items: center;
+  padding: ${px2vw(20)};
+  margin: ${px2vw(20)};
+  background-color: ${(props) => props.bgColor};
+  height: 100%;
+
+  @media (min-width: 768px) {
+    width: 90%;
+    min-height: ${px2vw(200, 768)};
+    height: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 90%;
+    min-height: ${px2vw(300)};
+    height: 100%;
+  }
+
+  @media (max-width: 425px) {
+    width: 100%;
+  }
+`;
+
+export const BasicContainer = styled.div`
+  display: flex;
+  flex-direction: ${(props) => (props.row ? "row" : "column")};
+  width: 100%;
+  height: 100%;
+
+  @media (max-width: 425px) {
+    flex-direction: column;
   }
 `;
