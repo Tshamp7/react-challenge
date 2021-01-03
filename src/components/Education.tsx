@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Container,
-  Box,
   BoxTitle,
   EduSideBar,
   EduDisplay,
@@ -9,14 +8,30 @@ import {
 } from "../styles/styleComponents";
 import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
 import Modal from "react-modal";
+import AddEduForm from "./AddEduForm";
 
-interface EducationInt {
+interface Name {
   name: string;
 }
 
-const Education = ({ name }: EducationInt) => {
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
+
+const Education = ({ name }: Name) => {
   const [eduList, setEduList] = useState<EducationItem[]>([]);
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const addEduItem = (educationItem: EducationItem) => {
+    setEduList([...eduList, educationItem]);
+  };
 
   function closeModal() {
     setIsOpen(false);
@@ -31,7 +46,18 @@ const Education = ({ name }: EducationInt) => {
       <BasicContainer>
         <BasicContainer>
           <BoxTitle>{`Welcome to ${name}'s education page`}</BoxTitle>
-          <button className="ui button">Add new education</button>
+          <div>
+            <button className="ui button" onClick={openModal}>
+              Add new education
+            </button>
+            <Modal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              style={customStyles}
+            >
+              <AddEduForm addEduItem={addEduItem} />
+            </Modal>
+          </div>
         </BasicContainer>
         <BasicContainer row>
           <EduSideBar>
