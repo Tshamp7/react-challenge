@@ -17,10 +17,11 @@ const EduDisplayDetail = ({
   details,
 }: EducationItem) => {
   return (
-    <BasicContainer>
-      <BoxTitle>{title}</BoxTitle>
-      <BoxText>{institution}</BoxText>
-      <BoxText>{details}</BoxText>
+    <BasicContainer start="true">
+      <BoxTitle txtAlign="left">{title}</BoxTitle>
+      <BoxText txtAlign="left">{`Institution Name: ${institution}`}</BoxText>
+      <BoxText txtAlign="left">{`Attendance: ${start} - ${end}`}</BoxText>
+      <BoxText txtAlign="left">{`Details: ${details}`}</BoxText>
     </BasicContainer>
   );
 };

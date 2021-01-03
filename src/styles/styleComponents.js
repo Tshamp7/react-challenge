@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: ${px2vw(32)};
+  height: 100%;
   max-width: 100%;
 
   @media (min-width: 1024px) {
@@ -64,7 +65,7 @@ export const Form = styled.form`
 export const BoxTitle = styled.h3`
   color: #333;
   font-size: 2rem;
-  text-align: center;
+  text-align: ${(props) => (props.txtAlign ? `${props.txtAlign}` : "center")};
 
   @media (min-width: 1024px) {
     font-size: 1.5rem;
@@ -74,7 +75,7 @@ export const BoxTitle = styled.h3`
 export const BoxText = styled.p`
   margin-top: ${px2vw(20)};
   color: #666;
-  text-align: center;
+  text-align: ${(props) => (props.txtAlign ? `${props.txtAlign}` : "center")};
   font-size: 1.5rem;
 
   @media (min-width: 1024px) {
@@ -140,7 +141,7 @@ export const EduDisplay = styled.div`
 export const BasicContainer = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.row ? "row" : "column")};
-  justify-content: center;
+  justify-content: ${(props) => (props.start ? "flex-start" : "center")};
   width: 100%;
   height: 100%;
 
@@ -151,4 +152,15 @@ export const BasicContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   align-self: center;
+`;
+
+export const Input = styled.div`
+  font-size: 16px;
+  font-size: max(16px, 1 em);
+  width: 350px;
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid lightgray;
+  border-radius: 6px;
 `;

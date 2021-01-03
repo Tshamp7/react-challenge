@@ -46,46 +46,44 @@ const Education = ({ name }: Name) => {
   }
 
   return (
-    <Container>
+    <BasicContainer>
       <BasicContainer>
+        <BoxTitle>{`Welcome to ${name}'s education page`}</BoxTitle>
         <BasicContainer>
-          <BoxTitle>{`Welcome to ${name}'s education page`}</BoxTitle>
-          <BasicContainer>
-            <ButtonContainer>
-              <button className="ui button" onClick={openModal}>
-                Add new education
-              </button>
-            </ButtonContainer>
+          <ButtonContainer>
+            <button className="ui button" onClick={openModal}>
+              Add new education
+            </button>
+          </ButtonContainer>
 
-            <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              style={customStyles}
-            >
-              <AddEduForm addEduItem={addEduItem} closeModal={closeModal} />
-            </Modal>
-          </BasicContainer>
-        </BasicContainer>
-        <BasicContainer row>
-          <EduSideBar>
-            <BoxTitle>Showwcase University</BoxTitle>
-          </EduSideBar>
-          <EduDisplay>
-            {eduList.length === 0 ? (
-              "Click Add Education"
-            ) : (
-              <EduDisplayDetail
-                start={eduList[0].start}
-                end={eduList[0].end}
-                title={eduList[0].title}
-                institution={eduList[0].institution}
-                details={eduList[0].details}
-              />
-            )}
-          </EduDisplay>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={customStyles}
+          >
+            <AddEduForm addEduItem={addEduItem} closeModal={closeModal} />
+          </Modal>
         </BasicContainer>
       </BasicContainer>
-    </Container>
+      <BasicContainer row>
+        <EduSideBar>
+          <BoxTitle>Showwcase University</BoxTitle>
+        </EduSideBar>
+        <EduDisplay>
+          {eduList.length === 0 ? (
+            "Click Add Education"
+          ) : (
+            <EduDisplayDetail
+              start={eduList[0].start}
+              end={eduList[0].end}
+              title={eduList[0].title}
+              institution={eduList[0].institution}
+              details={eduList[0].details}
+            />
+          )}
+        </EduDisplay>
+      </BasicContainer>
+    </BasicContainer>
   );
 };
 
