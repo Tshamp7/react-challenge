@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { BasicContainer, Form, BoxTitle } from "../styles/styleComponents";
+import { EducationItem } from "./EduDisplayDetail";
 import ErrorMsg from "./ErrorMsg";
 
 interface Props {
-  addEduItem: Function;
+  addEduItem: (item: EducationItem) => void;
+  closeModal: () => void;
 }
 
 const AddEduForm = (props: Props) => {
@@ -15,7 +17,7 @@ const AddEduForm = (props: Props) => {
 
   const [showError, setShowError] = useState(false);
 
-  const { addEduItem } = props;
+  const { addEduItem, closeModal } = props;
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -26,16 +28,15 @@ const AddEduForm = (props: Props) => {
       return setShowError(true);
     }
 
-    const eduItem = [
-      {
-        title,
-        institution,
-        start,
-        end,
-        details,
-      },
-    ];
+    const eduItem: EducationItem = {
+      title,
+      institution,
+      start,
+      end,
+      details,
+    };
     addEduItem(eduItem);
+    closeModal();
   };
 
   return (

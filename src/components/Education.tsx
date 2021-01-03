@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   BoxTitle,
@@ -28,7 +28,10 @@ const customStyles = {
 
 const Education = ({ name }: Name) => {
   const [eduList, setEduList] = useState<EducationItem[]>([]);
+  const [selectedItem, setSelected] = useState({});
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  Modal.setAppElement("#root");
 
   const addEduItem = (educationItem: EducationItem) => {
     setEduList([...eduList, educationItem]);
@@ -59,7 +62,7 @@ const Education = ({ name }: Name) => {
               onRequestClose={closeModal}
               style={customStyles}
             >
-              <AddEduForm addEduItem={addEduItem} />
+              <AddEduForm addEduItem={addEduItem} closeModal={closeModal} />
             </Modal>
           </BasicContainer>
         </BasicContainer>
@@ -69,9 +72,15 @@ const Education = ({ name }: Name) => {
           </EduSideBar>
           <EduDisplay>
             {eduList.length === 0 ? (
-              "Select 'Add new education' to get started!"
+              "Click Add Education"
             ) : (
-              <EduDisplayDetail {...eduList[0]} />
+              <EduDisplayDetail
+                start={eduList[0].start}
+                end={eduList[0].end}
+                title={eduList[0].title}
+                institution={eduList[0].institution}
+                details={eduList[0].details}
+              />
             )}
           </EduDisplay>
         </BasicContainer>

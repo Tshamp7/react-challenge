@@ -1,10 +1,5 @@
-import React from "react";
-import {
-  BasicContainer,
-  BoxText,
-  BoxTitle,
-  Box,
-} from "../styles/styleComponents";
+import React, { useState, useEffect } from "react";
+import { BasicContainer, BoxText, BoxTitle } from "../styles/styleComponents";
 
 export interface EducationItem {
   title: string;
@@ -14,14 +9,17 @@ export interface EducationItem {
   details: string;
 }
 
-const EduDisplayDetail = (educationItem: EducationItem) => {
-  const { title, institution, start, end, details } = educationItem;
-
+const EduDisplayDetail = ({
+  title,
+  institution,
+  start,
+  end,
+  details,
+}: EducationItem) => {
   return (
     <BasicContainer>
       <BoxTitle>{title}</BoxTitle>
       <BoxText>{institution}</BoxText>
-      <p>{`${start} - ${end}`}</p>
       <BoxText>{details}</BoxText>
     </BasicContainer>
   );
