@@ -5,6 +5,7 @@ import {
   EduSideBar,
   EduDisplay,
   BasicContainer,
+  ButtonContainer,
 } from "../styles/styleComponents";
 import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
 import Modal from "react-modal";
@@ -46,10 +47,13 @@ const Education = ({ name }: Name) => {
       <BasicContainer>
         <BasicContainer>
           <BoxTitle>{`Welcome to ${name}'s education page`}</BoxTitle>
-          <div>
-            <button className="ui button" onClick={openModal}>
-              Add new education
-            </button>
+          <BasicContainer>
+            <ButtonContainer>
+              <button className="ui button" onClick={openModal}>
+                Add new education
+              </button>
+            </ButtonContainer>
+
             <Modal
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
@@ -57,7 +61,7 @@ const Education = ({ name }: Name) => {
             >
               <AddEduForm addEduItem={addEduItem} />
             </Modal>
-          </div>
+          </BasicContainer>
         </BasicContainer>
         <BasicContainer row>
           <EduSideBar>

@@ -140,10 +140,15 @@ export const EduDisplay = styled.div`
 export const BasicContainer = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.row ? "row" : "column")};
+  justify-content: center;
   width: 100%;
   height: 100%;
 
   @media (max-width: 425px) {
     flex-direction: column;
   }
+`;
+
+export const ButtonContainer = styled.div`
+  align-self: center;
 `;
