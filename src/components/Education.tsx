@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   BoxTitle,
   EduDisplay,
@@ -11,8 +12,9 @@ import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
 import Modal from "react-modal";
 import AddEduForm from "./AddEduForm";
 import ShowwcaseUni from "./ShowwcaseUni";
+import { SelectedItemState } from "../redux/types";
 
-interface Name {
+interface Props {
   name: string;
 }
 
@@ -27,15 +29,12 @@ const customStyles = {
   },
 };
 
-const Education = ({ name }: Name) => {
-  const [eduList, setEduList] = useState<EducationItem[]>([]);
-  const [selectedItem, setSelected] = useState({
-    title: "",
-    institution: "",
-    start: "",
-    end: "",
-    details: "",
+const Education = ({ name }: Props) => {
+  const state = useSelector((state: SelectedItemState) => {
+    return { selected: state.selected };
   });
+
+  const [eduList, setEduList] = useState<EducationItem[]>([]);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   Modal.setAppElement("#root");
@@ -82,18 +81,18 @@ const Education = ({ name }: Name) => {
       </Banner>
       <BasicContainer row>
         <EduSideBar>
-          <ShowwcaseUni eduList={eduList} setSelected={setSelected} />
+          <ShowwcaseUni eduList={eduList} />
         </EduSideBar>
         <EduDisplay>
           {eduList.length === 0 ? (
             "Click 'Add New Education' To Get Started!"
           ) : (
             <EduDisplayDetail
-              start={selectedItem.start || eduList[0].start}
-              end={selectedItem.end || eduList[0].end}
-              title={selectedItem.title || eduList[0].title}
-              institution={selectedItem.institution || eduList[0].institution}
-              details={selectedItem.details || eduList[0].details}
+              start={state.selected.start || eduList[0].start}
+              end={state.selected.end || eduList[0].end}
+              title={state.selected.title || eduList[0].title}
+              institution={state.selected.institution || eduList[0].institution}
+              details={state.selected.details || eduList[0].details}
             />
           )}
         </EduDisplay>

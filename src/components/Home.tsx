@@ -5,7 +5,6 @@ import {
   BoxTitle,
   BoxText,
   Form,
-  BasicContainer,
 } from "../styles/styleComponents";
 import Education from "./Education";
 import ErrorMsg from "./ErrorMsg";

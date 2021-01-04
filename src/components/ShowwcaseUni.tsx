@@ -5,18 +5,13 @@ import UniversityItem from "./UniversityItem";
 
 interface Props {
   eduList: EducationItem[];
-  setSelected: Function;
 }
 
-const ShowwcaseUni = ({ eduList, setSelected }: Props) => {
+const ShowwcaseUni = ({ eduList }: Props) => {
   const eduItems = eduList.reverse().map((item) => {
     return (
       <div className="content">
-        <UniversityItem
-          key={item.institution}
-          eduItem={item}
-          setSelected={setSelected}
-        />
+        <UniversityItem key={item.institution} eduItem={item} />
       </div>
     );
   });

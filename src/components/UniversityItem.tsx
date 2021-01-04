@@ -1,20 +1,22 @@
 import React from "react";
 import { EducationItem } from "./EduDisplayDetail";
+import { useDispatch } from "react-redux";
+import { setSelected } from "../redux/actions";
 
 interface Props {
   eduItem: EducationItem;
-  setSelected: Function;
   key: string;
 }
 
-const UniversityItem = ({ eduItem, setSelected }: Props) => {
-  const handleClick = (eduItem: EducationItem, setSelected: Function) => {
-    setSelected(eduItem);
+const UniversityItem = ({ eduItem }: Props) => {
+  const dispatch = useDispatch();
+  const handleClick = (eduItem: EducationItem) => {
+    dispatch(setSelected(eduItem));
   };
 
   return (
     <div className="content">
-      <li onClick={() => handleClick(eduItem, setSelected)}>{eduItem.title}</li>
+      <li onClick={() => handleClick(eduItem)}>{eduItem.title}</li>
     </div>
   );
 };
