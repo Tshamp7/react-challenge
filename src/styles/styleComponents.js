@@ -65,6 +65,7 @@ export const Form = styled.form`
 export const BoxTitle = styled.h3`
   color: #333;
   font-size: 2rem;
+  cursor: default;
   text-align: ${(props) => (props.txtAlign ? `${props.txtAlign}` : "center")};
 
   @media (min-width: 1024px) {
@@ -75,6 +76,7 @@ export const BoxTitle = styled.h3`
 export const BoxText = styled.p`
   margin-top: ${px2vw(20)};
   color: #666;
+  cursor: default;
   text-align: ${(props) => (props.txtAlign ? `${props.txtAlign}` : "center")};
   font-size: 1.5rem;
 

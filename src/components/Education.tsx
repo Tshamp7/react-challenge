@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
-  Container,
   BoxTitle,
-  EduSideBar,
   EduDisplay,
   BasicContainer,
   ButtonContainer,
+  EduSideBar,
 } from "../styles/styleComponents";
 import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
 import Modal from "react-modal";
 import AddEduForm from "./AddEduForm";
+import ShowwcaseUni from "./ShowwcaseUni";
 
 interface Name {
   name: string;
@@ -28,7 +28,13 @@ const customStyles = {
 
 const Education = ({ name }: Name) => {
   const [eduList, setEduList] = useState<EducationItem[]>([]);
-  const [selectedItem, setSelected] = useState({});
+  const [selectedItem, setSelected] = useState({
+    title: "",
+    institution: "",
+    start: "",
+    end: "",
+    details: "",
+  });
   const [modalIsOpen, setIsOpen] = useState(false);
 
   Modal.setAppElement("#root");
@@ -67,18 +73,18 @@ const Education = ({ name }: Name) => {
       </BasicContainer>
       <BasicContainer row>
         <EduSideBar>
-          <BoxTitle>Showwcase University</BoxTitle>
+          <ShowwcaseUni eduList={eduList} setSelected={setSelected} />
         </EduSideBar>
         <EduDisplay>
           {eduList.length === 0 ? (
             "Click Add Education"
           ) : (
             <EduDisplayDetail
-              start={eduList[0].start}
-              end={eduList[0].end}
-              title={eduList[0].title}
-              institution={eduList[0].institution}
-              details={eduList[0].details}
+              start={selectedItem.start || eduList[0].start}
+              end={selectedItem.end || eduList[0].end}
+              title={selectedItem.title || eduList[0].title}
+              institution={selectedItem.institution || eduList[0].institution}
+              details={selectedItem.details || eduList[0].details}
             />
           )}
         </EduDisplay>

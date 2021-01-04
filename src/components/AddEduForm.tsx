@@ -1,15 +1,8 @@
 import React, { useState, useRef } from "react";
-import {
-  BasicContainer,
-  Form,
-  BoxTitle,
-  Input,
-} from "../styles/styleComponents";
+import { BasicContainer, Form, BoxTitle } from "../styles/styleComponents";
 import { EducationItem } from "./EduDisplayDetail";
 import ErrorMsg from "./ErrorMsg";
 import axios from "axios";
-import Institution from "./SearchResults";
-import SuggestionProps from "./SearchResults";
 import SearchResults from "./SearchResults";
 
 interface Props {
@@ -17,13 +10,8 @@ interface Props {
   closeModal: () => void;
 }
 
-interface SelectedInst {
-  value: string;
-}
-
 const AddEduForm = (props: Props) => {
   const API_URL = "http://universities.hipolabs.com/search";
-  const full_url = "http://universities.hipolabs.com/search?name=middle";
 
   const inputEl = useRef<HTMLInputElement>(null);
 
