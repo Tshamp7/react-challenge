@@ -5,6 +5,9 @@ import {
   BasicContainer,
   ButtonContainer,
   EduSideBar,
+  Container,
+  Box,
+  Banner,
 } from "../styles/styleComponents";
 import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
 import Modal from "react-modal";
@@ -53,12 +56,20 @@ const Education = ({ name }: Name) => {
 
   return (
     <BasicContainer>
-      <BasicContainer>
+      <Banner>
         <BoxTitle>{`Welcome to ${name}'s education page`}</BoxTitle>
         <BasicContainer>
           <ButtonContainer>
-            <button className="ui button" onClick={openModal}>
-              Add new education
+            <button
+              className="ui button"
+              onClick={openModal}
+              style={{
+                backgroundColor: "#646DF6",
+                color: "white",
+                borderRadius: "50px",
+              }}
+            >
+              Add New Education
             </button>
           </ButtonContainer>
 
@@ -70,14 +81,14 @@ const Education = ({ name }: Name) => {
             <AddEduForm addEduItem={addEduItem} closeModal={closeModal} />
           </Modal>
         </BasicContainer>
-      </BasicContainer>
+      </Banner>
       <BasicContainer row>
         <EduSideBar>
           <ShowwcaseUni eduList={eduList} setSelected={setSelected} />
         </EduSideBar>
         <EduDisplay>
           {eduList.length === 0 ? (
-            "Click Add Education"
+            "Click 'Add New Education' To Get Started!"
           ) : (
             <EduDisplayDetail
               start={selectedItem.start || eduList[0].start}

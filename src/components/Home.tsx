@@ -5,6 +5,7 @@ import {
   BoxTitle,
   BoxText,
   Form,
+  BasicContainer,
 } from "../styles/styleComponents";
 import Education from "./Education";
 import ErrorMsg from "./ErrorMsg";
@@ -20,12 +21,16 @@ const Home = () => {
   };
 
   if (user) {
-    return <Education name={input} />;
+    return (
+      <Container>
+        <Education name={input} />
+      </Container>
+    );
   } else {
     return (
       <Container>
         <Box>
-          <BoxTitle>Hi there! Weclome to your education showcase!</BoxTitle>
+          <BoxTitle>Hi There! Weclome To Your Education Showcase!</BoxTitle>
 
           <Form onSubmit={(event: React.FormEvent) => handleSubmit(event)}>
             <BoxText>Type your name and click "Enter" below to begin!</BoxText>
@@ -38,12 +43,19 @@ const Home = () => {
               />
             </div>
             <br />
-            <br />
-            <input className="ui button" type="submit" value="Enter" />
+            <input
+              className="ui button"
+              type="submit"
+              value="Enter"
+              style={{
+                backgroundColor: "#646DF6",
+                color: "white",
+                borderRadius: "50px",
+              }}
+            />
+            {errorMsg ? <ErrorMsg message="Name cant be blank" /> : null}
           </Form>
         </Box>
-        <br />
-        {errorMsg ? <ErrorMsg message="Name cant be blank" /> : null}
       </Container>
     );
   }

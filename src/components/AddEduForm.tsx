@@ -81,9 +81,7 @@ const AddEduForm = (props: Props) => {
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
         />
-
         <br />
-
         <input
           type="text"
           style={{ width: "300px" }}
@@ -92,8 +90,6 @@ const AddEduForm = (props: Props) => {
           placeholder={institution || "Search for Institution"}
           onChange={handleInputChange}
         />
-
-        <br />
         {results.length > 0 && query.length > 0 ? (
           <div className="ui input" style={{ width: "300px" }}>
             <SearchResults
@@ -103,9 +99,7 @@ const AddEduForm = (props: Props) => {
             />
           </div>
         ) : null}
-
         <br />
-
         <input
           type="date"
           style={{ width: "300px" }}
@@ -113,9 +107,7 @@ const AddEduForm = (props: Props) => {
           placeholder="Start Date"
           onChange={(e) => setStart(e.target.value)}
         />
-
         <br />
-
         <input
           type="date"
           style={{ width: "300px" }}
@@ -123,9 +115,7 @@ const AddEduForm = (props: Props) => {
           placeholder="End Date"
           onChange={(e) => setEnd(e.target.value)}
         />
-
         <br />
-
         <input
           type="text"
           style={{ width: "300px" }}
@@ -133,10 +123,17 @@ const AddEduForm = (props: Props) => {
           placeholder="Education Details"
           onChange={(e) => setDetails(e.target.value)}
         />
-
         <br />
-
-        <input className="ui button" type="submit" value="Enter" />
+        <input
+          className="ui button"
+          type="submit"
+          value="Enter"
+          style={{
+            backgroundColor: "#646DF6",
+            color: "white",
+            borderRadius: "50px",
+          }}
+        />
         <br />
         {showError ? (
           <ErrorMsg message="Please Ensure All Fields Are Filled Out!" />

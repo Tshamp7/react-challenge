@@ -30,13 +30,11 @@ export const Box = styled.div`
   @media (min-width: 768px) {
     width: ${px2vw(320, 768)};
     min-height: ${px2vw(200, 768)};
-    height: 100%;
   }
 
   @media (min-width: 1024px) {
     width: ${px2vw(500)};
     min-height: ${px2vw(300)};
-    height: 100%;
   }
 `;
 
@@ -144,8 +142,9 @@ export const BasicContainer = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.row ? "row" : "column")};
   justify-content: ${(props) => (props.start ? "flex-start" : "center")};
+  align-self: center;
   width: 100%;
-  height: 100%;
+  height: auto;
 
   @media (max-width: 425px) {
     flex-direction: column;
@@ -165,4 +164,12 @@ export const Input = styled.div`
   background-color: #fff;
   border: 2px solid lightgray;
   border-radius: 6px;
+`;
+
+export const Banner = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 7rem;
 `;
