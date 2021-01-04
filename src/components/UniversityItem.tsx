@@ -13,7 +13,9 @@ const UniversityItem = ({ eduItem, setSelected }: Props) => {
   };
 
   return (
-    <li onClick={() => handleClick(eduItem, setSelected)}>{eduItem.title}</li>
+    <div className="content">
+      <li onClick={() => handleClick(eduItem, setSelected)}>{eduItem.title}</li>
+    </div>
   );
 };
 

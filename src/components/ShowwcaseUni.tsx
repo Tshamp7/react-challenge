@@ -11,22 +11,26 @@ interface Props {
 const ShowwcaseUni = ({ eduList, setSelected }: Props) => {
   const eduItems = eduList.reverse().map((item) => {
     return (
-      <UniversityItem
-        key={item.institution}
-        eduItem={item}
-        setSelected={setSelected}
-      />
+      <div className="content">
+        <UniversityItem
+          key={item.institution}
+          eduItem={item}
+          setSelected={setSelected}
+        />
+      </div>
     );
   });
   return (
-    <BasicContainer start={"start"}>
-      <div>
-        <BoxTitle>Showwcase University</BoxTitle>
+    <BasicContainer start={"start"} className="ui card">
+      <div className="content">
+        <BoxTitle className="header">Showwcase University</BoxTitle>
         {eduList.length > 0 ? <BoxText>Select One To See More!</BoxText> : null}
       </div>
-      <ul style={{ listStyle: "none", paddingLeft: "0", cursor: "pointer" }}>
-        {eduItems.reverse()}
-      </ul>
+      <div className="content">
+        <ul style={{ listStyle: "none", paddingLeft: "0", cursor: "pointer" }}>
+          {eduItems.reverse()}
+        </ul>
+      </div>
     </BasicContainer>
   );
 };

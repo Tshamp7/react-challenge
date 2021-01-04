@@ -11,6 +11,7 @@ interface Props {
 }
 
 const AddEduForm = (props: Props) => {
+  const { addEduItem, closeModal } = props;
   const API_URL = "http://universities.hipolabs.com/search";
 
   const inputEl = useRef<HTMLInputElement>(null);
@@ -34,8 +35,6 @@ const AddEduForm = (props: Props) => {
 
   const [showError, setShowError] = useState(false);
 
-  const { addEduItem, closeModal } = props;
-
   const getResults = () => {
     axios.get(`${API_URL}?name=${query}`).then((res) => {
       const { data } = res;
@@ -52,8 +51,8 @@ const AddEduForm = (props: Props) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-
-    const fields = [title, institution, start, end, details];
+    // Form validation to ensure all fields are filled out
+    const fields = [title, institution || query, start, end, details];
 
     if (fields.some((item) => item === "")) {
       return setShowError(true);
@@ -61,7 +60,7 @@ const AddEduForm = (props: Props) => {
 
     const eduItem: EducationItem = {
       title,
-      institution,
+      institution: institution || query,
       start,
       end,
       details,
@@ -74,22 +73,28 @@ const AddEduForm = (props: Props) => {
     <BasicContainer>
       <BoxTitle>Add New Education</BoxTitle>
       <Form onSubmit={(event: React.FormEvent) => handleSubmit(event)}>
-        <input
-          type="text"
-          style={{ width: "300px" }}
-          value={title}
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <div className="ui input">
+          <input
+            type="text"
+            style={{ width: "300px" }}
+            value={title}
+            placeholder="Title"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
         <br />
-        <input
-          type="text"
-          style={{ width: "300px" }}
-          value={query}
-          ref={inputEl}
-          placeholder={institution || "Search for Institution"}
-          onChange={handleInputChange}
-        />
+        <div className="ui input">
+          <input
+            type="text"
+            style={{ width: "300px" }}
+            value={query}
+            ref={inputEl}
+            placeholder={institution || "Search for Institution"}
+            onChange={handleInputChange}
+          />
+        </div>
+
         {results.length > 0 && query.length > 0 ? (
           <div className="ui input" style={{ width: "300px" }}>
             <SearchResults
@@ -100,30 +105,40 @@ const AddEduForm = (props: Props) => {
           </div>
         ) : null}
         <br />
-        <input
-          type="date"
-          style={{ width: "300px" }}
-          value={start}
-          placeholder="Start Date"
-          onChange={(e) => setStart(e.target.value)}
-        />
+        <div className="ui input">
+          <input
+            type="date"
+            style={{ width: "300px" }}
+            value={start}
+            placeholder="Start Date"
+            onChange={(e) => setStart(e.target.value)}
+          />
+        </div>
+
         <br />
-        <input
-          type="date"
-          style={{ width: "300px" }}
-          value={end}
-          placeholder="End Date"
-          onChange={(e) => setEnd(e.target.value)}
-        />
+        <div className="ui input">
+          <input
+            type="date"
+            style={{ width: "300px" }}
+            value={end}
+            placeholder="End Date"
+            onChange={(e) => setEnd(e.target.value)}
+          />
+        </div>
+
         <br />
-        <input
-          type="text"
-          style={{ width: "300px" }}
-          value={details}
-          placeholder="Education Details"
-          onChange={(e) => setDetails(e.target.value)}
-        />
+        <div className="ui input">
+          <input
+            className="ui input"
+            type="text"
+            style={{ width: "300px" }}
+            value={details}
+            placeholder="Education Details"
+            onChange={(e) => setDetails(e.target.value)}
+          />
+        </div>
         <br />
+
         <input
           className="ui button"
           type="submit"

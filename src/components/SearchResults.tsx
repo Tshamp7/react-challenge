@@ -1,5 +1,6 @@
 import React from "react";
 import { BoxText } from "../styles/styleComponents";
+import Select from "react-select";
 
 export interface Institution {
   web_page: string;
@@ -20,7 +21,7 @@ const SearchResults = ({ suggestions, setQuery, setInst }: SuggestionProps) => {
     setQuery("");
   };
 
-  const firstTen = suggestions.slice(0, 11);
+  const firstTen = suggestions.slice(0, 5);
 
   const options = firstTen.map((result) => (
     <li

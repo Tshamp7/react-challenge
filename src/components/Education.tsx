@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BoxTitle,
   EduDisplay,
   BasicContainer,
   ButtonContainer,
   EduSideBar,
-  Container,
-  Box,
   Banner,
 } from "../styles/styleComponents";
 import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
@@ -72,7 +70,7 @@ const Education = ({ name }: Name) => {
               Add New Education
             </button>
           </ButtonContainer>
-
+          <br />
           <Modal
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
