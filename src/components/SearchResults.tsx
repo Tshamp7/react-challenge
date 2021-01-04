@@ -21,22 +21,25 @@ const SearchResults = ({ suggestions, setQuery, setInst }: SuggestionProps) => {
     setQuery("");
   };
 
-  const firstTen = suggestions.slice(0, 5);
+  const firstTen = suggestions.slice(0, 4);
 
   const options = firstTen.map((result) => (
-    <li
-      style={{ textAlign: "left" }}
-      key={result.name}
-      onClick={() => handleClick(result.name)}
-    >
-      {result.name}
-    </li>
+    <div className="ui card">
+      <li
+        style={{ textAlign: "left" }}
+        key={result.name}
+        onClick={() => handleClick(result.name)}
+        className="content"
+      >
+        {result.name}
+      </li>
+    </div>
   ));
 
   return (
-    <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
-      <BoxText>{options}</BoxText>
-    </ul>
+    <div className="content">
+      <ul style={{ listStyleType: "none", paddingLeft: "0" }}>{options}</ul>
+    </div>
   );
 };
 

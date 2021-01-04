@@ -4,6 +4,7 @@ import { EducationItem } from "./EduDisplayDetail";
 import ErrorMsg from "./ErrorMsg";
 import axios from "axios";
 import SearchResults from "./SearchResults";
+import Select from "react-select";
 
 interface Props {
   addEduItem: (item: EducationItem) => void;
@@ -94,9 +95,8 @@ const AddEduForm = (props: Props) => {
             onChange={handleInputChange}
           />
         </div>
-
         {results.length > 0 && query.length > 0 ? (
-          <div className="ui input" style={{ width: "300px" }}>
+          <div className="ui card" style={{ width: "300px" }}>
             <SearchResults
               suggestions={results}
               setQuery={setQuery}
@@ -104,6 +104,7 @@ const AddEduForm = (props: Props) => {
             />
           </div>
         ) : null}
+
         <br />
         <div className="ui input">
           <input
