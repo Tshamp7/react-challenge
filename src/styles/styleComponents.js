@@ -65,7 +65,6 @@ export const BoxTitle = styled.h3`
   font-size: 2rem;
   cursor: default;
   text-align: ${(props) => (props.txtAlign ? `${props.txtAlign}` : "center")};
-
   @media (min-width: 1024px) {
     font-size: 1.5rem;
   }
@@ -74,7 +73,7 @@ export const BoxTitle = styled.h3`
 export const BoxText = styled.p`
   margin-top: ${px2vw(20)};
   color: #666;
-  cursor: default;
+  cursor: ${(props) => (props.cursor ? "pointer;" : "default;")}
   text-align: ${(props) => (props.txtAlign ? `${props.txtAlign}` : "center")};
   font-size: 1.5rem;
 
@@ -86,10 +85,14 @@ export const BoxText = styled.p`
 export const EduSideBar = styled.div`
   display: flex;
   width: 10%;
+  border: ${(props) => (props.border ? "solid 1px lightgray;" : "none;")}
+  border-radius: ${(props) => (props.border ? "10px;" : "none;")}
   min-height: ${px2vw(200, 320)};
   flex-direction: ${(props) => (props.row ? "row" : "column")};
   align-items: center;
-  padding: ${px2vw(20)};
+  padding-top: ${px2vw(20)};
+  padding-bottom: ${px2vw(20)};
+
   margin: ${px2vw(20)};
   background-color: ${(props) => props.bgColor};
   height: 100%;
@@ -113,6 +116,9 @@ export const EduSideBar = styled.div`
 
 export const EduDisplay = styled.div`
   display: flex;
+  border: solid 1px lightgray;
+  border-radius: 10px;
+  transition: 0.3s;
   min-height: ${px2vw(200, 320)};
   flex-direction: ${(props) => (props.row ? "row" : "column")};
   align-items: center;
@@ -172,4 +178,16 @@ export const Banner = styled.div`
   flex-direction: column;
   width: 100%;
   height: 7rem;
+`;
+
+export const Content = styled.div`
+display: flex;
+width: 100%;
+height: 100%;
+flex-direction: column;
+align-self: center;
+padding: ${(props) =>
+  props.noTopPad ? "0px 10px 10px 10px;" : "10px 10px 10px 10px;"}
+justify-content: ${(props) => (props.start ? "flex-start;" : "center;")}
+border-bottom: ${(props) => (props.border ? "solid 1px lightgray;" : "none;")}}
 `;

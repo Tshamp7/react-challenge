@@ -1,5 +1,10 @@
 import React from "react";
-import { BasicContainer, BoxText, BoxTitle } from "../styles/styleComponents";
+import {
+  BasicContainer,
+  BoxText,
+  BoxTitle,
+  Content,
+} from "../styles/styleComponents";
 
 export interface EducationItem {
   title: string;
@@ -18,7 +23,10 @@ const EduDisplayDetail = ({
 }: EducationItem) => {
   return (
     <BasicContainer start="true">
-      <BoxTitle txtAlign="left">{title}</BoxTitle>
+      <Content border="true" start="true">
+        <BoxTitle txtAlign="left">{title}</BoxTitle>
+      </Content>
+
       <BoxText txtAlign="left">{`Institution Name: ${institution}`}</BoxText>
       <BoxText txtAlign="left">{`Attendance: ${start} - ${end}`}</BoxText>
       <BoxText txtAlign="left">{`Details: ${details}`}</BoxText>

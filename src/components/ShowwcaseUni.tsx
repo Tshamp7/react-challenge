@@ -1,5 +1,5 @@
 import React from "react";
-import { BasicContainer, BoxTitle, BoxText } from "../styles/styleComponents";
+import { BasicContainer, BoxTitle, Content } from "../styles/styleComponents";
 import { EducationItem } from "./EduDisplayDetail";
 import UniversityItem from "./UniversityItem";
 
@@ -11,26 +11,28 @@ interface Props {
 const ShowwcaseUni = ({ eduList, setSelected }: Props) => {
   const eduItems = eduList.reverse().map((item) => {
     return (
-      <div className="content">
-        <UniversityItem
-          key={item.institution}
-          eduItem={item}
-          setSelected={setSelected}
-        />
-      </div>
+      <UniversityItem
+        key={item.institution}
+        eduItem={item}
+        setSelected={setSelected}
+      />
     );
   });
   return (
-    <BasicContainer start={"start"} className="ui card">
-      <div className="content">
+    <BasicContainer start="start">
+      <Content border>
         <BoxTitle className="header">Showwcase University</BoxTitle>
-        {eduList.length > 0 ? <BoxText>Select One To See More!</BoxText> : null}
-      </div>
-      <div className="content">
-        <ul style={{ listStyle: "none", paddingLeft: "0", cursor: "pointer" }}>
+        {eduList.length > 0 ? (
+          <p style={{ font: "inherit", alignSelf: "center" }}>
+            Select One To See More!
+          </p>
+        ) : null}
+      </Content>
+      <Content start="true">
+        <ul style={{ listStyle: "none", paddingLeft: "0" }}>
           {eduItems.reverse()}
         </ul>
-      </div>
+      </Content>
     </BasicContainer>
   );
 };

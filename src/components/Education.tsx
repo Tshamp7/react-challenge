@@ -81,7 +81,7 @@ const Education = ({ name }: Name) => {
         </BasicContainer>
       </Banner>
       <BasicContainer row>
-        <EduSideBar>
+        <EduSideBar border>
           <ShowwcaseUni eduList={eduList} setSelected={setSelected} />
         </EduSideBar>
         <EduDisplay>

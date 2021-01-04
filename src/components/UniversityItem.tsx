@@ -1,4 +1,5 @@
 import React from "react";
+import { BoxText, Content } from "../styles/styleComponents";
 import { EducationItem } from "./EduDisplayDetail";
 
 interface Props {
@@ -13,9 +14,13 @@ const UniversityItem = ({ eduItem, setSelected }: Props) => {
   };
 
   return (
-    <div className="content">
-      <li onClick={() => handleClick(eduItem, setSelected)}>{eduItem.title}</li>
-    </div>
+    <Content border="true" start="true">
+      <li onClick={() => handleClick(eduItem, setSelected)}>
+        <BoxText txtAlign="start" cursor="true">
+          {eduItem.title}
+        </BoxText>
+      </li>
+    </Content>
   );
 };
 
