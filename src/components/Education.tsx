@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
   BoxTitle,
   EduDisplay,
@@ -7,12 +8,13 @@ import {
   EduSideBar,
   Banner,
 } from "../styles/styleComponents";
-import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
+import EduDisplayDetail from "./EduDisplayDetail";
 import Modal from "react-modal";
 import AddEduForm from "./AddEduForm";
 import ShowwcaseUni from "./ShowwcaseUni";
+import { EducationItem } from "./EduDisplayDetail";
 
-interface Name {
+interface Props {
   name: string;
 }
 
@@ -27,22 +29,26 @@ const customStyles = {
   },
 };
 
-const Education = ({ name }: Name) => {
-  const [eduList, setEduList] = useState<EducationItem[]>([]);
-  const [selectedItem, setSelected] = useState({
-    title: "",
-    institution: "",
-    start: "",
-    end: "",
-    details: "",
+interface SelectedState {
+  selectedReducer: { selected: EducationItem };
+}
+
+interface EduListState {
+  educationListReducer: { eduList: EducationItem[] };
+}
+
+const Education = ({ name }: Props) => {
+  const selectedState = useSelector((state: SelectedState) => {
+    return state.selectedReducer.selected;
   });
+
+  const eduListState = useSelector((state: EduListState) => {
+    return state.educationListReducer.eduList;
+  });
+
   const [modalIsOpen, setIsOpen] = useState(false);
 
   Modal.setAppElement("#root");
-
-  const addEduItem = (educationItem: EducationItem) => {
-    setEduList([...eduList, educationItem]);
-  };
 
   function closeModal() {
     setIsOpen(false);
@@ -76,24 +82,26 @@ const Education = ({ name }: Name) => {
             onRequestClose={closeModal}
             style={customStyles}
           >
-            <AddEduForm addEduItem={addEduItem} closeModal={closeModal} />
+            <AddEduForm closeModal={closeModal} />
           </Modal>
         </BasicContainer>
       </Banner>
       <BasicContainer row>
         <EduSideBar border>
-          <ShowwcaseUni eduList={eduList} setSelected={setSelected} />
+          <ShowwcaseUni eduList={eduListState} />
         </EduSideBar>
         <EduDisplay>
-          {eduList.length === 0 ? (
+          {eduListState.length === 0 ? (
             "Click 'Add New Education' To Get Started!"
           ) : (
             <EduDisplayDetail
-              start={selectedItem.start || eduList[0].start}
-              end={selectedItem.end || eduList[0].end}
-              title={selectedItem.title || eduList[0].title}
-              institution={selectedItem.institution || eduList[0].institution}
-              details={selectedItem.details || eduList[0].details}
+              start={selectedState.start || eduListState[0].start}
+              end={selectedState.end || eduListState[0].end}
+              title={selectedState.title || eduListState[0].title}
+              institution={
+                selectedState.institution || eduListState[0].institution
+              }
+              details={selectedState.details || eduListState[0].details}
             />
           )}
         </EduDisplay>
