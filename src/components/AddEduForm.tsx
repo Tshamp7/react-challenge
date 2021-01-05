@@ -2,10 +2,11 @@ import React, { useState, useRef } from "react";
 import { BasicContainer, Form, BoxTitle } from "../styles/styleComponents";
 import { EducationItem } from "./EduDisplayDetail";
 import ErrorMsg from "./ErrorMsg";
-import axios from "axios";
+import axios, { CancelToken } from "axios";
 import SearchResults from "./SearchResults";
 import { setEduItem } from "../redux/actions";
 import { useDispatch } from "react-redux";
+import _ from "lodash";
 
 interface Props {
   closeModal: () => void;
@@ -27,8 +28,8 @@ const AddEduForm = (props: Props) => {
   ];
 
   const [title, setTitle] = useState<string>("");
-  const [institution, setInst] = useState<string>("");
-  const [query, setQuery] = useState<string>("");
+  const [institution, setInst] = useState<any>("");
+  const [query, setQuery] = useState<any>("");
   const [results, setResults] = useState(defaultResult);
   const [start, setStart] = useState<string>("");
   const [end, setEnd] = useState<string>("");
@@ -37,17 +38,15 @@ const AddEduForm = (props: Props) => {
   const [showError, setShowError] = useState(false);
 
   const getResults = () => {
+    setQuery(institution);
     axios.get(`${API_URL}?name=${query}`).then((res) => {
-      const { data } = res;
-      setResults(data);
+      setResults(res.data);
     });
   };
 
-  const handleInputChange = () => {
-    if (inputEl && inputEl.current) {
-      setQuery(inputEl.current.value);
-      getResults();
-    }
+  const handleChange = (e: any) => {
+    setInst(e.target.value);
+    getResults();
   };
 
   const dispatch = useDispatch();
@@ -63,7 +62,7 @@ const AddEduForm = (props: Props) => {
 
     const eduItem: EducationItem = {
       title,
-      institution: institution || query,
+      institution: institution || query, // allows user to use their typed in entry in place of clicking a school returned from the API call.
       start,
       end,
       details,
@@ -91,10 +90,10 @@ const AddEduForm = (props: Props) => {
           <input
             type="text"
             style={{ width: "300px" }}
-            value={query}
+            value={institution}
             ref={inputEl}
             placeholder={institution || "Search for Institution"}
-            onChange={handleInputChange}
+            onChange={(e) => handleChange(e)}
           />
         </div>
         {results.length > 0 && query.length > 0 ? (

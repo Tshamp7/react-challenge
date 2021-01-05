@@ -19,13 +19,12 @@ const SearchResults = ({ suggestions, setQuery, setInst }: SuggestionProps) => {
     setQuery("");
   };
 
-  const firstTen = suggestions.slice(0, 4);
+  const firstTen = suggestions.slice(0, 3);
 
   const options = firstTen.map((result) => (
-    <div className="ui card">
+    <div className="ui card" key={result.name}>
       <li
         style={{ textAlign: "left" }}
-        key={result.name}
         onClick={() => handleClick(result.name)}
         className="content"
       >

@@ -5,7 +5,6 @@ import { setSelected } from "../redux/actions";
 
 interface Props {
   eduItem: EducationItem;
-  key: string;
 }
 
 const UniversityItem = ({ eduItem }: Props) => {
