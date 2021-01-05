@@ -58,13 +58,7 @@ const AddEduForm = (props: Props) => {
     axios.get(`${API_URL}?name=${query}`).then((res) => {
       setResults(res.data);
     });
-    console.log("API CALL");
   };
-
-  //   const handleChange = (e: any) => {
-  //     setInst(e.target.value);
-  //     getResults();
-  //   };
 
   const dispatch = useDispatch();
 
@@ -113,7 +107,7 @@ const AddEduForm = (props: Props) => {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        {results.length > 0 && query.length > 0 ? (
+        {results[0].name !== "" && query.length > 0 ? (
           <div className="ui card" style={{ width: "300px" }}>
             <SearchResults
               suggestions={results}
