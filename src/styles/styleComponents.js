@@ -184,7 +184,7 @@ export const Content = styled.div`
 display: flex;
 width: 100%;
 height: 100%;
-flex-direction: column;
+flex-direction: ${(props) => (props.row ? "row" : "column")};
 align-self: center;
 padding: ${(props) =>
   props.noTopPad ? "0px 10px 10px 10px;" : "10px 10px 10px 10px;"}

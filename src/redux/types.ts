@@ -2,6 +2,7 @@ import { EducationItem } from "../components/EduDisplayDetail";
 
 export const SET_SELECTED = "SET_SELECTED";
 export const ADD_EDU_ITEM = "ADD_EDU_ITEM";
+export const DELETE_EDU_ITEM = "DELETE_EDU_ITEM";
 
 export interface SelectedItemState {
   selected: EducationItem;
@@ -21,5 +22,11 @@ interface AddEducationItem {
   payload: EducationItem;
 }
 
+interface DeleteEducationItem {
+  type: typeof DELETE_EDU_ITEM;
+  payload: EducationItem;
+}
+
 export type SelectedActionTypes = SetSelectedEducationItem;
 export type AddEducationTypes = AddEducationItem;
+export type DeleteEducationTypes = DeleteEducationItem;

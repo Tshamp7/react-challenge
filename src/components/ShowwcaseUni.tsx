@@ -9,7 +9,7 @@ interface Props {
 
 const ShowwcaseUni = ({ eduList }: Props) => {
   const eduItems = eduList.reverse().map((item) => {
-    return <UniversityItem eduItem={item} />;
+    return <UniversityItem key={item.title} eduItem={item} />;
   });
   return (
     <BasicContainer start="start">

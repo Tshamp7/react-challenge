@@ -24,7 +24,7 @@ const SearchResults = ({ suggestions, setQuery, setInst }: SuggestionProps) => {
   const options = firstTen.map((result) => (
     <div className="ui card" key={result.name}>
       <li
-        style={{ textAlign: "left" }}
+        style={{ textAlign: "left", cursor: "pointer" }}
         onClick={() => handleClick(result.name)}
         className="content"
       >

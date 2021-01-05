@@ -2,11 +2,10 @@ import React, { useState, useRef } from "react";
 import { BasicContainer, Form, BoxTitle } from "../styles/styleComponents";
 import { EducationItem } from "./EduDisplayDetail";
 import ErrorMsg from "./ErrorMsg";
-import axios, { CancelToken } from "axios";
+import axios from "axios";
 import SearchResults from "./SearchResults";
 import { setEduItem } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import _ from "lodash";
 
 interface Props {
   closeModal: () => void;
@@ -37,17 +36,35 @@ const AddEduForm = (props: Props) => {
 
   const [showError, setShowError] = useState(false);
 
-  const getResults = () => {
-    setQuery(institution);
+  // These pieces of state will be used to limit API calls to when the user has stopped typing.
+  const [typingTimeOut, setTypingTimeout] = useState<any>(0);
+
+  const handleChange = (event: any) => {
+    if (typingTimeOut) {
+      clearTimeout(typingTimeOut);
+    }
+
+    setInst(event.target.value);
+    setQuery(event.target.value);
+
+    setTypingTimeout(
+      setTimeout(function () {
+        getResults(query);
+      }, 2000)
+    );
+  };
+
+  const getResults = (query: string) => {
     axios.get(`${API_URL}?name=${query}`).then((res) => {
       setResults(res.data);
     });
+    console.log("API CALL");
   };
 
-  const handleChange = (e: any) => {
-    setInst(e.target.value);
-    getResults();
-  };
+  //   const handleChange = (e: any) => {
+  //     setInst(e.target.value);
+  //     getResults();
+  //   };
 
   const dispatch = useDispatch();
 
