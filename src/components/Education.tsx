@@ -8,11 +8,11 @@ import {
   EduSideBar,
   Banner,
 } from "../styles/styleComponents";
-import EduDisplayDetail, { EducationItem } from "./EduDisplayDetail";
+import EduDisplayDetail from "./EduDisplayDetail";
 import Modal from "react-modal";
 import AddEduForm from "./AddEduForm";
 import ShowwcaseUni from "./ShowwcaseUni";
-import { SelectedItemState } from "../redux/types";
+import { EducationItem } from "./EduDisplayDetail";
 
 interface Props {
   name: string;
@@ -29,19 +29,26 @@ const customStyles = {
   },
 };
 
+interface SelectedState {
+  selectedReducer: { selected: EducationItem };
+}
+
+interface EduListState {
+  educationListReducer: { eduList: EducationItem[] };
+}
+
 const Education = ({ name }: Props) => {
-  const state = useSelector((state: SelectedItemState) => {
-    return { selected: state.selected };
+  const selectedState = useSelector((state: SelectedState) => {
+    return state.selectedReducer.selected;
   });
 
-  const [eduList, setEduList] = useState<EducationItem[]>([]);
+  const eduListState = useSelector((state: EduListState) => {
+    return state.educationListReducer.eduList;
+  });
+
   const [modalIsOpen, setIsOpen] = useState(false);
 
   Modal.setAppElement("#root");
-
-  const addEduItem = (educationItem: EducationItem) => {
-    setEduList([...eduList, educationItem]);
-  };
 
   function closeModal() {
     setIsOpen(false);
@@ -75,24 +82,26 @@ const Education = ({ name }: Props) => {
             onRequestClose={closeModal}
             style={customStyles}
           >
-            <AddEduForm addEduItem={addEduItem} closeModal={closeModal} />
+            <AddEduForm closeModal={closeModal} />
           </Modal>
         </BasicContainer>
       </Banner>
       <BasicContainer row>
         <EduSideBar>
-          <ShowwcaseUni eduList={eduList} />
+          <ShowwcaseUni eduList={eduListState} />
         </EduSideBar>
         <EduDisplay>
-          {eduList.length === 0 ? (
+          {eduListState.length === 0 ? (
             "Click 'Add New Education' To Get Started!"
           ) : (
             <EduDisplayDetail
-              start={state.selected.start || eduList[0].start}
-              end={state.selected.end || eduList[0].end}
-              title={state.selected.title || eduList[0].title}
-              institution={state.selected.institution || eduList[0].institution}
-              details={state.selected.details || eduList[0].details}
+              start={selectedState.start || eduListState[0].start}
+              end={selectedState.end || eduListState[0].end}
+              title={selectedState.title || eduListState[0].title}
+              institution={
+                selectedState.institution || eduListState[0].institution
+              }
+              details={selectedState.details || eduListState[0].details}
             />
           )}
         </EduDisplay>

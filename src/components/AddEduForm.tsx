@@ -4,15 +4,15 @@ import { EducationItem } from "./EduDisplayDetail";
 import ErrorMsg from "./ErrorMsg";
 import axios from "axios";
 import SearchResults from "./SearchResults";
-import Select from "react-select";
+import { setEduItem } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 interface Props {
-  addEduItem: (item: EducationItem) => void;
   closeModal: () => void;
 }
 
 const AddEduForm = (props: Props) => {
-  const { addEduItem, closeModal } = props;
+  const { closeModal } = props;
   const API_URL = "http://universities.hipolabs.com/search";
 
   const inputEl = useRef<HTMLInputElement>(null);
@@ -50,6 +50,8 @@ const AddEduForm = (props: Props) => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     // Form validation to ensure all fields are filled out
@@ -66,7 +68,7 @@ const AddEduForm = (props: Props) => {
       end,
       details,
     };
-    addEduItem(eduItem);
+    dispatch(setEduItem(eduItem));
     closeModal();
   };
 

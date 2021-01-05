@@ -1,6 +1,4 @@
 import React from "react";
-import { BoxText } from "../styles/styleComponents";
-import Select from "react-select";
 
 export interface Institution {
   web_page: string;
